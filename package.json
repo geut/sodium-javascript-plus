@@ -1,0 +1,71 @@
+{
+  "name": "@geut/sodium-javascript-plus",
+  "version": "0.0.1",
+  "description": "Template to create modules following the Geut path",
+  "main": "index.js",
+  "files": [
+    "build",
+    "lib",
+    "index.js"
+  ],
+  "scripts": {
+    "start": "node index.js",
+    "build": "npm run clean && npm run asbuild",
+    "build:sodium": "node scripts/build-sodium.js",
+    "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --validate --sourceMap --debug",
+    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --validate --sourceMap --optimize",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
+    "test": "jest --passWithNoTests",
+    "posttest": "npm run lint",
+    "lint": "standard \"**/*.js\"",
+    "version": "chan release --allow-yanked ${npm_package_version} && git add .",
+    "prepublishOnly": "npm run build && npm run test",
+    "clean": "npm run clean:wasm && npm run clean:sodium",
+    "clean:wasm": "del-cli build/*",
+    "clean:sodium": "del-cli libsodium/libsodium-js"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.9.4",
+    "@wasmer/wasi": "^0.10.2",
+    "sodium-javascript": "^0.5.6"
+  },
+  "devDependencies": {
+    "@geut/chan": "^2.0.0",
+    "assemblyscript": "^0.9.4",
+    "binaryen": "^91.0.0",
+    "del-cli": "^3.0.0",
+    "execa": "^4.0.0",
+    "jest": "^25.2.6",
+    "standard": "^14.3.3"
+  },
+  "jest": {
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  },
+  "standard": {
+    "env": [
+      "jest",
+      "node",
+      "browser"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geut/sodium-javascript-plus.git"
+  },
+  "keywords": [
+    "create",
+    "geut",
+    "module"
+  ],
+  "author": {
+    "name": "GEUT",
+    "email": "contact@geutstudio.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geut/sodium-javascript-plus/issues"
+  },
+  "homepage": "https://github.com/geut/sodium-javascript-plus#readme"
+}
