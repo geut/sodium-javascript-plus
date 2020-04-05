@@ -10,14 +10,15 @@
   ],
   "scripts": {
     "start": "node index.js",
-    "build": "npm run clean && npm run asbuild",
+    "build": "npm run clean:wasm && npm run build:sodium && npm run build:binding",
     "build:sodium": "node scripts/build-sodium.js",
-    "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --validate --sourceMap --debug",
-    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --validate --sourceMap --optimize",
-    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
+    "build:binding": "npm run build:bindingc && npm run build:bindingjs",
+    "build:bindingc": "npm run asbuild -- -b build/binding-c.wasm assembly/binding-c.ts --runtime none",
+    "build:bindingjs": "npm run asbuild -- -b build/binding-js.wasm assembly/binding-js.ts --runtime none",
+    "asbuild": "asc --validate --sourceMap --optimize",
     "test": "jest --passWithNoTests",
     "posttest": "npm run lint",
-    "lint": "standard \"**/*.js\"",
+    "lint": "standard \"index.js\" \"lib/*.js\" \"tests/*.js\"",
     "version": "chan release --allow-yanked ${npm_package_version} && git add .",
     "prepublishOnly": "npm run build && npm run test",
     "clean": "npm run clean:wasm && npm run clean:sodium",
@@ -26,7 +27,6 @@
   },
   "dependencies": {
     "@assemblyscript/loader": "^0.9.4",
-    "@wasmer/wasi": "^0.10.2",
     "sodium-javascript": "^0.5.6"
   },
   "devDependencies": {
@@ -36,6 +36,8 @@
     "del-cli": "^3.0.0",
     "execa": "^4.0.0",
     "jest": "^25.2.6",
+    "nanobench": "^2.1.1",
+    "sodium-native": "^3.0.1",
     "standard": "^14.3.3"
   },
   "jest": {
