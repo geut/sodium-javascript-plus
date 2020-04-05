@@ -1,4 +1,3 @@
-const fs = require('fs')
 const loader = require('@assemblyscript/loader')
 const sodiumJS = require('sodium-javascript')
 
@@ -9,7 +8,7 @@ const heap = new Heap()
 
 const sodiumWasm = loadSodiumWasm(sodiumJS, heap)
 
-const bindingC = loader.instantiateSync(fs.readFileSync(`${__dirname}/build/binding-c.wasm`), {
+const bindingC = loader.instantiateSync(Buffer.from(require('./build/binding-c'), 'base64'), {
   env: {
     memory: heap.memory
   },
@@ -19,7 +18,8 @@ const bindingC = loader.instantiateSync(fs.readFileSync(`${__dirname}/build/bind
 heap.setRuntime(bindingC)
 
 sodiumJS.crypto_aead_xchacha20poly1305_ietf_encrypt = function (out, m, ad, nsec, nonce, key) {
-  const _out = heap.alloc(out.length)
+  const cipherLength = m.length + sodiumJS.crypto_aead_xchacha20poly1305_ietf_ABYTES
+  const _out = heap.alloc(cipherLength)
 
   bindingC.crypto_aead_xchacha20poly1305_ietf_encrypt(
     _out,
@@ -33,16 +33,18 @@ sodiumJS.crypto_aead_xchacha20poly1305_ietf_encrypt = function (out, m, ad, nsec
     heap.set(key)
   )
 
-  heap.copy(out, _out)
+  heap.copy(out, _out, cipherLength)
   heap.clear()
+  return cipherLength
 }
 
 sodiumJS.crypto_aead_xchacha20poly1305_ietf_decrypt = function (out, nsec, c, ad, nonce, key) {
-  const _out = heap.alloc(out.length)
+  const messageLength = c.length - sodiumJS.crypto_aead_xchacha20poly1305_ietf_ABYTES
+  const _out = heap.alloc(messageLength)
 
   bindingC.crypto_aead_xchacha20poly1305_ietf_decrypt(
     _out,
-    out.length,
+    null,
     nsec ? heap.set(nsec) : null,
     heap.set(c),
     c.length,
@@ -52,8 +54,9 @@ sodiumJS.crypto_aead_xchacha20poly1305_ietf_decrypt = function (out, nsec, c, ad
     heap.set(key)
   )
 
-  heap.copy(out, _out)
+  heap.copy(out, _out, messageLength)
   heap.clear()
+  return messageLength
 }
 
 sodiumJS.crypto_kx_keypair = function (pk, sk) {
@@ -65,8 +68,8 @@ sodiumJS.crypto_kx_keypair = function (pk, sk) {
     _sk
   )
 
-  heap.copy(pk, _pk)
-  heap.copy(sk, _sk)
+  heap.copy(pk, _pk, pk.length)
+  heap.copy(sk, _sk, sk.length)
   heap.clear()
 }
 
@@ -80,8 +83,8 @@ sodiumJS.crypto_kx_seed_keypair = function (pk, sk, seed) {
     heap.set(seed)
   )
 
-  heap.copy(pk, _pk)
-  heap.copy(sk, _sk)
+  heap.copy(pk, _pk, pk.length)
+  heap.copy(sk, _sk, sk.length)
   heap.clear()
 }
 
@@ -97,8 +100,8 @@ sodiumJS.crypto_kx_client_session_keys = function (clientRx, clientTx, clientPk,
     heap.set(serverPk)
   )
 
-  heap.copy(clientRx, _clientRx)
-  heap.copy(clientTx, _clientTx)
+  heap.copy(clientRx, _clientRx, clientRx.length)
+  heap.copy(clientTx, _clientTx, clientTx.length)
   heap.clear()
 }
 
@@ -114,8 +117,8 @@ sodiumJS.crypto_kx_server_session_keys = function (serverRx, serverTx, serverPk,
     heap.set(clientPk)
   )
 
-  heap.copy(serverRx, _serverRx)
-  heap.copy(serverTx, _serverTx)
+  heap.copy(serverRx, _serverRx, serverRx.length)
+  heap.copy(serverTx, _serverTx, serverTx.length)
   heap.clear()
 }
 
