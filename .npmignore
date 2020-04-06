@@ -1,0 +1,5 @@
+libsodium
+bench
+assembly
+build/*.wasm
+tests

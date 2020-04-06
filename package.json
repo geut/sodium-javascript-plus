@@ -3,11 +3,6 @@
   "version": "0.0.1",
   "description": "sodium-javascript with xchacha20 and kx support",
   "main": "index.js",
-  "files": [
-    "build",
-    "lib",
-    "index.js"
-  ],
   "scripts": {
     "start": "node index.js",
     "build": "npm run clean:wasm && npm run build:sodium && npm run build:binding",
