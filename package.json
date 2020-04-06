@@ -70,5 +70,8 @@
   "bugs": {
     "url": "https://github.com/geut/sodium-javascript-plus/issues"
   },
-  "homepage": "https://github.com/geut/sodium-javascript-plus#readme"
+  "homepage": "https://github.com/geut/sodium-javascript-plus#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
