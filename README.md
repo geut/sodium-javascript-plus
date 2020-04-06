@@ -5,7 +5,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-> sodium-javascript with support for xchacha20 and kx
+> **Experimental** :microscope: sodium-javascript with support for xchacha20 and kx
 
 ## <a name="install"></a> Install
 
