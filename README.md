@@ -1,14 +1,16 @@
 # sodium-javascript-plus
 
 [![Build Status](https://travis-ci.com/geut/sodium-javascript-plus.svg?branch=master)](https://travis-ci.com/geut/sodium-javascript-plus)
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-> Template to create modules following the :snail: **Geut** path
+> sodium-javascript with support for xchacha20 and kx
 
 ## <a name="install"></a> Install
 
 ```
+$ npm install @geut/sodium-javascript-plus
 ```
 
 ## <a name="usage"></a> Usage

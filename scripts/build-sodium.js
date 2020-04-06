@@ -67,7 +67,7 @@ if (DEBUG) {
     memoryBase = await compileToWASM(memoryBase, cryptoModule)
   }
 
-  console.log(`Your AssemblyScript build must go with: --memoryBase ${memoryBase}`)
+  console.log(`\nMemory base: ${memoryBase}`)
 })()
 
 const execaOpts = { shell: true, cwd: LIBSODIUM_PATH, stdout: process.stdout, stderr: process.stderr }

@@ -1,7 +1,7 @@
 {
   "name": "@geut/sodium-javascript-plus",
   "version": "0.0.1",
-  "description": "Template to create modules following the Geut path",
+  "description": "sodium-javascript with xchacha20 and kx support",
   "main": "index.js",
   "files": [
     "build",
@@ -15,7 +15,7 @@
     "build:binding": "npm run build:bindingc && npm run build:bindingjs && node scripts/binding-to-base64.js",
     "build:bindingc": "npm run asbuild -- -b build/binding-c.wasm assembly/binding-c.ts --runtime none",
     "build:bindingjs": "npm run asbuild -- -b build/binding-js.wasm assembly/binding-js.ts --runtime none",
-    "asbuild": "asc --validate --sourceMap --optimize",
+    "asbuild": "asc --validate --optimize",
     "test": "jest --passWithNoTests",
     "posttest": "npm run lint",
     "lint": "standard \"index.js\" \"lib/*.js\" \"tests/*.js\"",
@@ -57,9 +57,10 @@
     "url": "git+https://github.com/geut/sodium-javascript-plus.git"
   },
   "keywords": [
-    "create",
-    "geut",
-    "module"
+    "sodium",
+    "wasm",
+    "xchacha20",
+    "kx"
   ],
   "author": {
     "name": "GEUT",
