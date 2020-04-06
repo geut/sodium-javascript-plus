@@ -6,5 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 0.0.3 - 2020-04-06 [YANKED]
+
 ## 0.0.2 - 2020-04-06 [YANKED]
-[Unreleased]: https://github.com/geut/sodium-javascript-plus/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/geut/sodium-javascript-plus/compare/v0.0.3...HEAD
