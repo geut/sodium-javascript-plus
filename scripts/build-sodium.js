@@ -12,7 +12,6 @@ const DEBUG = process.argv.includes('--debug')
 
 // MEMORY USAGE
 const STACK_SIZE = 128 * 1024 // 128 kb / lib.o
-const TOTAL_MEMORY = 16777216 // (bytes) === 256 pages of 65 kb
 
 const DEFAULT_LDFLAGS = [
   'RESERVED_FUNCTION_POINTERS=8',
@@ -101,13 +100,13 @@ async function buildSodium () {
   await execa('emmake', ['make', '-j4', 'install'], execaOpts)
 }
 
-async function compileToWASM (memoryBase, { lib, name, functions = {}, constants = {} }) {
+async function compileToWASM (memoryBase, { lib, name, functions = [], constants = {} }) {
   console.log(`\n- compiling ${name}\n`)
 
   const binaryPath = path.join(BUILD_PATH, `${name}.wasm`)
   const base64Path = path.join(BUILD_PATH, `${name}.js`)
 
-  const EXPORTED_FUNCTIONS = Object.keys(functions).concat(Object.keys(constants)).map(f => `"_${f}"`).join(',')
+  const EXPORTED_FUNCTIONS = functions.concat(Object.keys(constants)).map(f => `"_${f}"`).join(',')
 
   const args = [
     '-s GLOBAL_BASE=' + memoryBase,

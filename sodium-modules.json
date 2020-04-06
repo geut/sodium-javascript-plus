@@ -5,20 +5,20 @@
       "crypto_onetimeauth/poly1305/donna/libsodium_la-poly1305_donna.o"
     ],
     "name": "onetimeauth_poly1305",
-    "functions": {
-      "crypto_onetimeauth_poly1305_final": true,
-      "crypto_onetimeauth_poly1305_init": true,
-      "crypto_onetimeauth_poly1305_update": true
-    }
+    "functions": [
+      "crypto_onetimeauth_poly1305_final",
+      "crypto_onetimeauth_poly1305_init",
+      "crypto_onetimeauth_poly1305_update"
+    ]
   },
   {
     "lib": [
       "crypto_core/hchacha20/libsodium_la-core_hchacha20.o"
     ],
     "name": "core_hchacha20",
-    "functions": {
-      "crypto_core_hchacha20": true
-    }
+    "functions": [
+      "crypto_core_hchacha20"
+    ]
   },
   {
     "lib": [
@@ -26,20 +26,20 @@
       "crypto_stream/chacha20/ref/libsodium_la-chacha20_ref.o"
     ],
     "name": "stream_chacha20",
-    "functions": {
-      "crypto_stream_chacha20_ietf_ext": true,
-      "crypto_stream_chacha20_ietf_ext_xor_ic": true
-    }
+    "functions": [
+      "crypto_stream_chacha20_ietf_ext",
+      "crypto_stream_chacha20_ietf_ext_xor_ic"
+    ]
   },
   {
     "lib": [
       "crypto_aead/xchacha20poly1305/sodium/libsodium_la-aead_xchacha20poly1305.o"
     ],
     "name": "aead_xchacha20poly1305",
-    "functions": {
-      "crypto_aead_xchacha20poly1305_ietf_decrypt": true,
-      "crypto_aead_xchacha20poly1305_ietf_encrypt": true
-    },
+    "functions": [
+      "crypto_aead_xchacha20poly1305_ietf_decrypt",
+      "crypto_aead_xchacha20poly1305_ietf_encrypt"
+    ],
     "constants": {
       "crypto_aead_xchacha20poly1305_ietf_keybytes": "crypto_aead_xchacha20poly1305_ietf_KEYBYTES",
       "crypto_aead_xchacha20poly1305_ietf_npubbytes": "crypto_aead_xchacha20poly1305_ietf_NPUBBYTES",
@@ -52,18 +52,12 @@
       "crypto_kx/libsodium_la-crypto_kx.o"
     ],
     "name": "crypto_kx",
-    "requireFunctionsJS": [
-      "crypto_generichash",
-      "crypto_generichash_final",
-      "crypto_generichash_init",
-      "crypto_generichash_update"
+    "functions": [
+      "crypto_kx_keypair",
+      "crypto_kx_seed_keypair",
+      "crypto_kx_client_session_keys",
+      "crypto_kx_server_session_keys"
     ],
-    "functions": {
-      "crypto_kx_keypair": true,
-      "crypto_kx_seed_keypair": true,
-      "crypto_kx_client_session_keys": true,
-      "crypto_kx_server_session_keys": true
-    },
     "constants": {
       "crypto_kx_sessionkeybytes": "crypto_kx_SESSIONKEYBYTES",
       "crypto_kx_publickeybytes": "crypto_kx_PUBLICKEYBYTES",
