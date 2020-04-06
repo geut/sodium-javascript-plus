@@ -3,3 +3,4 @@ bench
 assembly
 build/*.wasm
 tests
+scripts
