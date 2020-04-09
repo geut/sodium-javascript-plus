@@ -30,6 +30,7 @@
     "del-cli": "^3.0.0",
     "execa": "^4.0.0",
     "jest": "^25.2.6",
+    "libsodium-wrappers": "^0.7.6",
     "nanobench": "^2.1.1",
     "sodium-native": "^3.0.1",
     "standard": "^14.3.3"
