@@ -21,7 +21,6 @@
     "clean:sodium": "del-cli libsodium/libsodium-js"
   },
   "dependencies": {
-    "@assemblyscript/loader": "^0.9.4",
     "sodium-javascript": "^0.5.6"
   },
   "devDependencies": {
