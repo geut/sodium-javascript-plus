@@ -22,6 +22,11 @@ test('aead_xchacha20poly1305', () => {
     key
   )
 
+  expect(cipher.toString('hex') === 'bd6d179d3e83d43b9576579493c0e939572a1700252bfaccbe' +
+  'd2902c21396cbb731c7f1b0b4aa6440bf3a82f4eda7e39ae64c6708c54c216cb96b72e1213b4522f8c9b' +
+  'a40db5d945b11b69b982c1bb9e3f3fac2bc369488f76b2383565d3fff921f9664c97637da9768812f615' +
+  'c68b13b52ec0875924c1c7987947deafd8780acf49').toBe(true)
+
   const decrypted = Buffer.alloc(message.length)
 
   sodium.crypto_aead_xchacha20poly1305_ietf_decrypt(

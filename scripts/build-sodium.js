@@ -11,7 +11,7 @@ const BUILD_PATH = path.join(ROOT_PATH, 'build')
 const DEBUG = process.argv.includes('--debug')
 
 // MEMORY USAGE
-const STACK_SIZE = 0 // this library is not using the stack memory implementation of emscripten
+const STACK_SIZE = 1 * 1024 * 1024 // this library is not using the stack memory implementation of emscripten
 
 const DEFAULT_LDFLAGS = [
   'RESERVED_FUNCTION_POINTERS=8',
