@@ -64,8 +64,6 @@ sodiumWrappers.ready.then(() => {
   })
 })
 
-xchacha20poly1305(sodiumJS)
-
 function xchacha20poly1305 (sodium) {
   const message = Buffer.from(
     '4c616469657320616e642047656e746c656d656e206f662074686520636c6173' +
