@@ -23,7 +23,7 @@ module.exports = (sodiumJS) => {
     )
 
     heap.copy(out, _out, cipherLength)
-    heap.clear()
+    heap.release()
     return cipherLength
   }
 
@@ -44,7 +44,7 @@ module.exports = (sodiumJS) => {
     )
 
     heap.copy(out, _out, messageLength)
-    heap.clear()
+    heap.release()
     return messageLength
   }
 
@@ -59,7 +59,7 @@ module.exports = (sodiumJS) => {
 
     heap.copy(pk, _pk, pk.length)
     heap.copy(sk, _sk, sk.length)
-    heap.clear()
+    heap.release()
   }
 
   sodiumJS.crypto_kx_seed_keypair = function (pk, sk, seed) {
@@ -74,7 +74,7 @@ module.exports = (sodiumJS) => {
 
     heap.copy(pk, _pk, pk.length)
     heap.copy(sk, _sk, sk.length)
-    heap.clear()
+    heap.release()
   }
 
   sodiumJS.crypto_kx_client_session_keys = function (clientRx, clientTx, clientPk, clientSk, serverPk) {
@@ -91,7 +91,7 @@ module.exports = (sodiumJS) => {
 
     heap.copy(clientRx, _clientRx, clientRx.length)
     heap.copy(clientTx, _clientTx, clientTx.length)
-    heap.clear()
+    heap.release()
   }
 
   sodiumJS.crypto_kx_server_session_keys = function (serverRx, serverTx, serverPk, serverSk, clientPk) {
@@ -108,7 +108,7 @@ module.exports = (sodiumJS) => {
 
     heap.copy(serverRx, _serverRx, serverRx.length)
     heap.copy(serverTx, _serverTx, serverTx.length)
-    heap.clear()
+    heap.release()
   }
 
   return sodiumJS
