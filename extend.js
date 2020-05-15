@@ -6,6 +6,48 @@ module.exports = (sodiumJS) => {
 
   const sodiumWasm = loadSodiumWasm(sodiumJS, heap)
 
+  sodiumJS.crypto_aead_chacha20poly1305_ietf_encrypt = function (out, m, ad, nsec, nonce, key) {
+    const cipherLength = m.length + sodiumJS.crypto_aead_chacha20poly1305_ietf_ABYTES
+    const _out = heap.alloc(cipherLength)
+
+    sodiumWasm.crypto_aead_chacha20poly1305_ietf_encrypt(
+      _out,
+      null,
+      heap.set(m),
+      m.length,
+      ad ? heap.set(ad) : null,
+      ad ? ad.length : null,
+      nsec ? heap.set(nsec) : null,
+      heap.set(nonce),
+      heap.set(key)
+    )
+
+    heap.copy(out, _out, cipherLength)
+    heap.release()
+    return cipherLength
+  }
+
+  sodiumJS.crypto_aead_chacha20poly1305_ietf_decrypt = function (out, nsec, c, ad, nonce, key) {
+    const messageLength = c.length - sodiumJS.crypto_aead_chacha20poly1305_ietf_ABYTES
+    const _out = heap.alloc(messageLength)
+
+    sodiumWasm.crypto_aead_chacha20poly1305_ietf_decrypt(
+      _out,
+      null,
+      nsec ? heap.set(nsec) : null,
+      heap.set(c),
+      c.length,
+      ad ? heap.set(ad) : null,
+      ad ? ad.length : null,
+      heap.set(nonce),
+      heap.set(key)
+    )
+
+    heap.copy(out, _out, messageLength)
+    heap.release()
+    return messageLength
+  }
+
   sodiumJS.crypto_aead_xchacha20poly1305_ietf_encrypt = function (out, m, ad, nsec, nonce, key) {
     const cipherLength = m.length + sodiumJS.crypto_aead_xchacha20poly1305_ietf_ABYTES
     const _out = heap.alloc(cipherLength)
