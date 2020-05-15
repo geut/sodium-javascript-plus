@@ -1,6 +1,6 @@
 {
   "name": "@geut/sodium-javascript-plus",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "sodium-javascript with xchacha20 and kx support",
   "main": "index.js",
   "scripts": {
